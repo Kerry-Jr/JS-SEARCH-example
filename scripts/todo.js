@@ -15,13 +15,20 @@ document.querySelector("#search-text").addEventListener("input", (e) => {
 });
 
 document.querySelector("#new-todo").addEventListener("submit", (e) => {
+  const text = e.target.elements.text.value.trim()
   e.preventDefault();
-  todos.push({
-    text: e.target.elements.text.value,
-    completed: false,
-    id: uuidv4()
+  if(text.length > 0){
+    todos.push({
+      text,
+      completed: false,
+      id: uuidv4()
 
-  });
+    });
+  } else {
+    alert('Must provide text for todo!')
+  }
+
+  
   saveTodos(todos);
   renderTodos(todos, filters);
   e.target.elements.text.value = "";
